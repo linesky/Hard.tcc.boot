@@ -16,9 +16,10 @@ def move_up(event):
     global x2
     global y2
     global y1
-    y1=y1-5
+    y1=y1+5
 
-    
+    canvas.coords(l1,200,y1,0,y2)
+    canvas.coords(l2,200,y1,400,y2)
     canvas.coords(rectangle,x1,y1,x2,y2)
     
 
@@ -30,9 +31,10 @@ def move_down(event):
     global x2
     global y2
     global y1
-    y1=y1+5
+    y1=y1-5
 
-    
+    canvas.coords(l1,200,y1,0,y2)
+    canvas.coords(l2,200,y1,400,y2)
     canvas.coords(rectangle,x1,y1,x2,y2)
 
 
@@ -51,6 +53,8 @@ canvas.pack()
 
 # Desenhar o retangulo no centro do canvas
 rectangle = canvas.create_rectangle(x1, y1, x2, y2, fill="gold")
+l1=canvas.create_line(200,y1,0,y2,fill="black")
+l2=canvas.create_line(200,y1,400,y2,fill="black")
 # Associar as teclas de seta para cima e para baixo as funcoes de movimento
 window.bind("<Up>", move_up)
 window.bind("<Down>", move_down)

@@ -68,7 +68,7 @@ cords2=-260,260,200,660
 rectangle = canvas.create_rectangle(0, 200, 400, 400, fill="gold")
 l1=canvas.create_arc(cords,start=0,extent=90,fill="yellow")
 l2=canvas.create_arc(cords2,start=0,extent=90,fill="gold")
-rectangle = canvas.create_rectangle(0, 0, 400, 200, fill="gold")
+rectangle = canvas.create_rectangle(0, 0, 400, 200, fill="yellow")
 #l2=canvas.create_arc(0,45,100,fill="yellow")
 # Associar as teclas de seta para cima e para baixo as funcoes de movimento
 window.bind("<Left>", move_2)

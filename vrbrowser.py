@@ -16,11 +16,11 @@ def move_2(event):
     global x2
     global y2
     global y1
-    if(y1>100):
+    if(y1>50):
         y1=y1-8
         y2=y2+8
-        x1=x1-8
-        x2=x2+8
+        #x1=x1-8
+        #x2=x2+8
 
 
     canvas.coords(l1,x1,y1,x2,y2)
@@ -40,8 +40,8 @@ def move_1(event):
     if(y1<200):
         y1=y1+8
         y2=y2-8
-        x1=x1+8
-        x2=x2-8
+        #x1=x1+8
+        #x2=x2-8
     
     canvas.coords(l1,x1,y1,x2,y2)
     

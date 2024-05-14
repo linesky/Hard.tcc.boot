@@ -5,37 +5,47 @@ global x2
 global y2
 global y1
 # Coordenadas do retangulo
-x1 = 0
+x1 = -260
 y1 = 200
-x2 = 400
-y2 = 400
+x2 = 260
+y2 = 600
 
 # Funcao para mover o retangulo para cima
-def move_up(event):
+def move_2(event):
     global x1
     global x2
     global y2
     global y1
-    y1=y1+5
+    if(y1>100):
+        y1=y1-8
+        y2=y2+8
+        x1=x1-8
+        x2=x2+8
 
-    canvas.coords(l1,200,y1,0,y2)
-    canvas.coords(l2,200,y1,400,y2)
-    canvas.coords(rectangle,x1,y1,x2,y2)
+
+    canvas.coords(l1,x1,y1,x2,y2)
+    canvas.coords(l2,x1,y1+60,x2-60,y2-60)
+
+   
     
 
 
 
 # Funcao para mover o retangulo para baixo
-def move_down(event):
+def move_1(event):
     global x1
     global x2
     global y2
     global y1
-    y1=y1-5
-
-    canvas.coords(l1,200,y1,0,y2)
-    canvas.coords(l2,200,y1,400,y2)
-    canvas.coords(rectangle,x1,y1,x2,y2)
+    if(y1<200):
+        y1=y1+8
+        y2=y2-8
+        x1=x1+8
+        x2=x2-8
+    
+    canvas.coords(l1,x1,y1,x2,y2)
+    
+    canvas.coords(l2,x1,y1+60,x2-60,y2-60)
 
 
 
@@ -52,12 +62,16 @@ canvas.pack()
 
 
 # Desenhar o retangulo no centro do canvas
-rectangle = canvas.create_rectangle(x1, y1, x2, y2, fill="gold")
-l1=canvas.create_line(200,y1,0,y2,fill="black")
-l2=canvas.create_line(200,y1,400,y2,fill="black")
+
+cords=-260,200,260,600
+cords2=-260,260,200,660
+l1=canvas.create_arc(cords,start=0,extent=90,fill="yellow")
+l2=canvas.create_arc(cords2,start=0,extent=90,fill="gold")
+rectangle = canvas.create_rectangle(0, 0, 400, 200, fill="gold")
+#l2=canvas.create_arc(0,45,100,fill="yellow")
 # Associar as teclas de seta para cima e para baixo as funcoes de movimento
-window.bind("<Up>", move_up)
-window.bind("<Down>", move_down)
+window.bind("<Left>", move_2)
+window.bind("<Right>", move_1)
 
 
 

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotating Cube Illusion</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: yellow;
+  }
+  canvas {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const size = 400;  // Size of the canvas
+  const squareSize = 100;  // Size of the square
+  let angle = 0;
+
+  canvas.width = size;
+  canvas.height = size;
+
+  function toRadians(degrees) {
+    return degrees * Math.PI / 180;
+  }
+
+  function getRotatedPoint(x, y, angle) {
+    const rad = toRadians(angle);
+    return {
+      x: x * Math.cos(rad) - y * Math.sin(rad),
+      y: x * Math.sin(rad) + y * Math.cos(rad)
+    };
+  }
+
+  function drawSquare(x, y, size, angle) {
+    const halfSize = size / 2;
+    const points = [
+      { x: -halfSize, y: -halfSize },
+      { x: halfSize, y: -halfSize },
+      { x: halfSize, y: halfSize },
+      { x: -halfSize, y: halfSize }
+    ].map(point => getRotatedPoint(point.x, point.y, angle));
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].x + x, points[0].y + y);
+    for (let i = 1; i < points.length; i++) {
+      ctx.lineTo(points[i].x + x, points[i].y + y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    return points.map(point => ({ x: point.x + x, y: point.y + y }));
+  }
+
+  function drawCube() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'black';
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    const frontSquare = drawSquare(centerX, centerY, squareSize, angle);
+    const backSquare = drawSquare(centerX+20, centerY+20, squareSize, angle);
+
+    // Draw lines connecting the corners of the front and back squares
+    for (let i = 0; i < frontSquare.length; i++) {
+      ctx.beginPath();
+      ctx.moveTo(frontSquare[i].x, frontSquare[i].y);
+      ctx.lineTo(backSquare[i].x, backSquare[i].y);
+      ctx.stroke();
+    }
+  }
+
+  function update() {
+    angle += 5;
+    drawCube();
+    document.title = `Angle: ${angle} degrees`;
+  }
+
+  setInterval(update, 500);
+</script>
+</body>
+</html>

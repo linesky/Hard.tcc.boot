@@ -1,3 +1,5 @@
-# virtual.reality.browser
+# distro.puppy.cpp
 
-virtual reality html reality ilusion
+
+
+c++ example of runing a elf in puppy os
